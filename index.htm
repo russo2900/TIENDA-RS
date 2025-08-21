@@ -211,6 +211,7 @@
             <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Carga </button>
             <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Accesorios </button>
             <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Hogar </button>
+            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Juguetes </button>
         </div>
     </section>
 
@@ -426,167 +427,117 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Modal para imágenes -->
-    <div class="modal" id="imageModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="zoom-level" id="zoomLevel">100%</div>
-            <img id="modalImg" class="modal-image" src="" alt="">
-            <div class="modal-controls">
-                <button class="modal-btn" onclick="zoomOut()">
-                    <i class="fas fa-search-minus"></i>
-                </button>
-                <button class="modal-btn" onclick="resetZoom()">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
-                <button class="modal-btn" onclick="zoomIn()">
-                    <i class="fas fa-search-plus"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cart Notification -->
-    <div class="cart-notification" id="cart-notification">
-        <i class="fas fa-check-circle mr-2"></i>
-        <span>Producto agregado al carrito</span>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">TIENDA RS</h3>
-                    <p class="text-gray-400">Los mejores precios en electrónica y accesorios. Calidad garantizada.</p>
+            <!-- Producto 15 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="15.jpg" alt="Juguete popit con sonido" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('15.jpg', 'JUGUETE POPIT CON SONIDO')">
                 </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
-                    <a href="https://wa.me/541159677565" class="block text-gray-400 hover:text-white mb-2">
-                        <i class="fab fa-whatsapp mr-2"></i>1159677565
-                    </a>
-                    <a href="mailto:ezegullotta@gmail.com" class="block text-gray-400 hover:text-white mb-2">
-                        <i class="fas fa-envelope mr-2"></i>ezegullotta@gmail.com
-                    </a>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Horario</h4>
-                    <p class="text-gray-400">Lunes a Viernes: 9:00 - 18:00</p>
-                    <p class="text-gray-400">Sábados: 10:00 - 14:00</p>
+                <h3 class="text-lg font-semibold mb-2">JUGUETE POPIT CON SONIDO</h3>
+                <p class="text-gray-600 text-sm mb-3">Divertido, múltiples colores, efecto sonoro, antiestrés</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$7.800</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                <p class="text-gray-400">© 2024 TIENDA RS. Todos los derechos reservados.</p>
+
+            <!-- Producto 16 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="16.jpg" alt="Auricular de peluche" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('16.jpg', 'AURICULAR DE PELUCHE')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">AURICULAR DE PELUCHE</h3>
+                <p class="text-gray-600 text-sm mb-3">Diseño adorable, sonido estéreo, material suave, perfecto para niños</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$24.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
             </div>
-        </div>
-    </footer>
 
-    <script>
-        let cart = [];
-        let currentZoom = 100;
-        let currentImage = '';
+            <!-- Producto 17 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="17.jpg" alt="Labubu dancing" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('17.jpg', 'LABUBU DANCING')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">LABUBU DANCING</h3>
+                <p class="text-gray-600 text-sm mb-3">Figura coleccionable, movimiento de baile, diseño kawaii</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$18.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
 
-        function showNotification(message) {
-            const notification = document.getElementById('cart-notification');
-            notification.querySelector('span').textContent = message;
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+            <!-- Producto 18 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="18.jpg" alt="Mini cámara infantil" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('18.jpg', 'MINI CÁMARA INFANTIL')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">MINI CÁMARA INFANTIL</h3>
+                <p class="text-gray-600 text-sm mb-3">Diseño para niños, fácil de usar, grabación HD, divertida</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$18.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
 
-        // Función para abrir el modal con la imagen
-        function openModal(imageSrc, productName) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImg');
-            const zoomLevel = document.getElementById('zoomLevel');
-            
-            currentImage = imageSrc;
-            modalImg.src = imageSrc;
-            modalImg.alt = productName;
-            currentZoom = 100;
-            modalImg.style.transform = 'scale(1)';
-            zoomLevel.textContent = '100%';
-            
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
+            <!-- Producto 19 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="19.jpg" alt="Set de utensillos" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('19.jpg', 'SET DE UTENSILLOS')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">SET DE UTENSILLOS</h3>
+                <p class="text-gray-600 text-sm mb-3">Completo, calidad premium, múltiples piezas, ideal cocina</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$32.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
 
-        // Función para cerrar el modal
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        }
+            <!-- Producto 20 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="20.jpg" alt="Cámara endoscopio" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('20.jpg', 'CÁMARA ENDOSCOPIO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CÁMARA ENDOSCOPIO</h3>
+                <p class="text-gray-600 text-sm mb-3">Inspección visual, LED incorporado, flexible, uso profesional</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$16.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
 
-        // Funciones de zoom
-        function zoomIn() {
-            if (currentZoom < 300) {
-                currentZoom += 25;
-                updateZoom();
-            }
-        }
+            <!-- Producto 21 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="21.jpg" alt="Vaso cafetero térmico con sensor" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('21.jpg', 'VASO CAFETERO TÉRMICO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">VASO CAFETERO TÉRMICO</h3>
+                <p class="text-gray-600 text-sm mb-3">Sensor temperatura, mantiene calor, diseño elegante, 500ml</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$15.600</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
 
-        function zoomOut() {
-            if (currentZoom > 25) {
-                currentZoom -= 25;
-                updateZoom();
-            }
-        }
-
-        function resetZoom() {
-            currentZoom = 100;
-            updateZoom();
-        }
-
-        function updateZoom() {
-            const modalImg = document.getElementById('modalImg');
-            const zoomLevel = document.getElementById('zoomLevel');
-            
-            modalImg.style.transform = `scale(${currentZoom / 100})`;
-            zoomLevel.textContent = `${currentZoom}%`;
-        }
-
-        // Cerrar modal con ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Cerrar modal al hacer clic fuera de la imagen
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Event listeners para los botones de compra
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('fa-shopping-cart') || e.target.textContent === 'Comprar') {
-                showNotification('Producto agregado al carrito');
-            }
-        });
-
-        // Filtrado de categorías
-        document.querySelectorAll('.category-filter').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.category-filter').forEach(btn => {
-                    btn.classList.remove('bg-blue-600', 'text-white');
-                    btn.classList.add('bg-white', 'border-gray-300', 'text-gray-600');
-                });
-                this.classList.remove('bg-white', 'border-gray-300', 'text-gray-600');
-                this.classList.add('bg-blue-600', 'text-white');
-            });
-        });
-    </script>
-</body>
-</html>
-
+            <!-- Producto 22 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="22.jpg" alt="Pava eléctrica de vidrio 2L" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('22.jpg', 'PAVA ELÉCTRICA DE VIDRIO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">PAVA ELÉCTRICA DE VIDRIO
 
 
