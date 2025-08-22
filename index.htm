@@ -463,18 +463,24 @@
 </div> 
     </section>
 
-<!-- Botón flotante WhatsApp con tooltip -->
+<!-- Botón flotante WhatsApp con tooltip visible también en mobile -->
 <a href="https://wa.me/541159677565" 
    target="_blank" 
-   class="whatsapp-float group fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg text-3xl flex items-center justify-center relative" 
+   class="whatsapp-float group fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg text-3xl flex items-center justify-center relative z-50" 
    aria-label="Chatea con nosotros por WhatsApp">
    <i class="fab fa-whatsapp"></i>
 
-   <!-- Tooltip -->
-   <span class="tooltip-message absolute bottom-16 right-1/2 translate-x-1/2 bg-green-600 text-white text-sm py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+   <!-- Tooltip para desktop (hover) -->
+   <span class="tooltip-message hidden md:block absolute bottom-16 right-1/2 translate-x-1/2 bg-green-600 text-white text-sm py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      Contáctanos
+   </span>
+
+   <!-- Tooltip para mobile (siempre visible) -->
+   <span class="md:hidden absolute bottom-16 right-1/2 translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded z-50">
       Contáctanos
    </span>
 </a>
+
 
     <!-- Modal -->
     <div class="modal" id="image-modal">
