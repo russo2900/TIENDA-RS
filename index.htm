@@ -18,18 +18,25 @@
             font-family: 'Inter', system-ui, sans-serif;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        body.dark-mode {
+            background: #1e293b;
+            color: #f8fafc;
         }
         .header-gradient {
             background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+        }
+        .header-gradient.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #3b82f6 100%);
         }
         .product-card {
             transition: all 0.3s ease;
             border: 2px solid #e2e8f0;
         }
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
+        .product-card.dark-mode {
+            background: #2a2a2a;
+            border-color: #4b5563;
         }
         .price-tag {
             background: linear-gradient(135deg, var(--primary), #3b82f6);
@@ -38,31 +45,9 @@
             border-radius: 8px;
             font-weight: bold;
         }
-        .category-filter {
-            transition: all 0.3s ease;
+        .price-tag.dark-mode {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
-        .category-filter:hover {
-            transform: scale(1.05);
-            background: var(--primary);
-            color: white;
-        }
-        .cart-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        .cart-notification.show {
-            transform: translateX(0);
-        }
-
         /* Modal Styles */
         .modal {
             position: fixed;
@@ -79,12 +64,10 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
-
         .modal.open {
             opacity: 1;
             visibility: visible;
         }
-
         .modal-content {
             position: relative;
             max-width: 90vw;
@@ -95,18 +78,15 @@
             transform: scale(0.8);
             transition: transform 0.3s ease;
         }
-
         .modal.open .modal-content {
             transform: scale(1);
         }
-
         .modal-image {
             width: 100%;
             height: auto;
             max-height: 70vh;
             object-fit: contain;
         }
-
         .modal-close {
             position: absolute;
             top: 15px;
@@ -124,60 +104,8 @@
             font-size: 20px;
             transition: background 0.3s ease;
         }
-
         .modal-close:hover {
             background: rgba(0, 0, 0, 0.9);
-        }
-
-        .modal-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 25px;
-        }
-
-        .modal-btn {
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .modal-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .zoom-level {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        .product-image {
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .product-image:hover {
-            transform: scale(1.05);
         }
     </style>
 </head>
@@ -195,10 +123,7 @@
                         <p class="text-blue-100 text-sm">Electrónica y Accesorios</p>
                     </div>
                 </div>
-                <a href="https://wa.me/541159677565" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                    <span>1159677565</span>
-                </a>
+                <button id="toggle-dark-mode" class="bg-gray-800 text-white px-4 py-2 rounded-lg">Modo Oscuro</button>
             </div>
         </div>
     </header>
@@ -206,16 +131,14 @@
     <!-- Categories -->
     <section class="container mx-auto px-6 py-8">
         <div class="flex flex-wrap gap-4 justify-center mb-8">
-            <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold"> Todos </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Iluminación </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Carga </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Accesorios </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Hogar </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Juguetes </button>
+            <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('all')"> Todos </button>
+            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('iluminacion')"> Iluminación </button>
+            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('carga')"> Carga </button>
+            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('accesorios')"> Accesorios </button>
         </div>
     </section>
 
-    <!-- Products Grid -->
+ <!-- Products Grid -->
     <section class="container mx-auto px-6 py-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
             <!-- Producto 1 -->
@@ -546,37 +469,47 @@
         </button>
     </div>
 </div> 
-               </div> <!-- Cierre del grid de productos -->
+    <!-- Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modal-image" class="modal-image" src="" alt="">
+        </div>
+    </div>
 
-        </section> <!-- Cierre de sección de productos -->
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = imageSrc;
+            modal.classList.add('open');
+        }
 
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12 mt-12">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">TIENDA RS</h3>
-                        <p class="text-gray-400">Los mejores precios en electrónica y accesorios. Calidad garantizada.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Contacto</h4>
-                        <a href="https://wa.me/541159677565" class="block text-gray-400 hover:text-white mb-2">
-                            <i class="fab fa-whatsapp mr-2"></i>1159677565
-                        </a>
-                        <a href="mailto:ezegullotta@gmail.com" class="block text-gray-400 hover:text-white mb-2">
-                            <i class="fas fa-envelope mr-2"></i>ezegullotta@gmail.com
-                        </a>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Horario</h4>
-                        <p class="text-gray-400">Lunes a Viernes: 9:00 - 18:00</p>
-                        <p class="text-gray-400">Sábados: 10:00 - 20:00</p>
-                    </div>
-                </div>
-                <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                    <p class="text-gray-400">© 2024 TIENDA RS. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </footer>
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('open');
+        }
 
-    </body>
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+            const header = document.querySelector('.header-gradient');
+            header.classList.toggle('dark-mode');
+        });
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
