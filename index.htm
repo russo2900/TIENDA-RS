@@ -1,210 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIENDA RS - Electrónica y Accesorios</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #dc2626;
-      --accent: #10b981;
-      --dark: #1e293b;
-      --light: #f8fafc;
-    }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      min-height: 100vh;
-    }
-    .header-gradient {
-      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
-    }
-    .product-card {
-      transition: all 0.3s ease;
-      border: 2px solid #e2e8f0;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
-    }
-    .price-tag {
-      background: linear-gradient(135deg, var(--primary), #3b82f6);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    .category-filter {
-      transition: all 0.3s ease;
-    }
-    .category-filter:hover {
-      transform: scale(1.05);
-      background: var(--primary);
-      color: white;
-    }
-    .cart-notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 1000;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-    }
-    .cart-notification.show {
-      transform: translateX(0);
-    }
-
-    /* Modal Styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    .modal.open {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-content {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-    }
-    .modal.open .modal-content {
-      transform: scale(1);
-    }
-    .modal-image {
-      width: 100%;
-      height: auto;
-      max-height: 70vh;
-      object-fit: contain;
-    }
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      transition: background 0.3s ease;
-    }
-    .modal-close:hover {
-      background: rgba(0, 0, 0, 0.9);
-    }
-    .modal-controls {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px;
-      border-radius: 25px;
-    }
-    .modal-btn {
-      background: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-    .modal-btn:hover {
-      background: var(--primary);
-      color: white;
-    }
-    .zoom-level {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 14px;
-    }
-    .product-image {
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .product-image:hover {
-      transform: scale(1.05);
-    }
-
-    /* Botón flotante WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: #fff;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 32px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      background-color: #1ebe5d;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIENDA RS - Electrónica y Accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #dc2626;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        body.dark-mode {
+            background: #1e293b; /* Fondo oscuro */
+            color: #f8fafc; /* Color de texto claro */
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+        }
+        .header-gradient.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #3b82f6 100%);
+        }
+        .product-card {
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+        .product-card.dark-mode {
+            background: #2a2a2a; /* Fondo de tarjeta oscuro */
+            border-color: #4b5563; /* Color de borde oscuro */
+        }
+        .price-tag {
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .price-tag.dark-mode {
+            background: linear-gradient(135deg, #3b82f6, #2563eb); /* Fondo de etiqueta de precio oscuro */
+        }
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background 0.3s ease;
+        }
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/541159677565" 
-     target="_blank" 
-     class="whatsapp-float" 
-     aria-label="Chatea con nosotros por WhatsApp">
-     <i class="fab fa-whatsapp"></i>
-  </a>
-<body class="text-gray-800">
-    <!-- Header -->
     <header class="header-gradient text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -232,11 +131,11 @@
         </div>
     </section>
 
- <!-- Products Grid -->
+    <!-- Products Grid -->
     <section class="container mx-auto px-6 py-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
             <!-- Producto 1 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card bg-white rounded-xl p-4 relative" data-category="iluminacion">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="1.jpg" alt="Patillera Novatix" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('1.jpg', 'PATILLERA NOVATIX')">
                 </div>
@@ -249,6 +148,373 @@
                     </button>
                 </div>
             </div>
+<!-- Producto 2 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="2.jpg" alt="Foco de luz LED con control" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('2.jpg', 'FOCO DE LUZ CON CONTROL')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">FOCO DE LUZ CON CONTROL</h3>
+                <p class="text-gray-600 text-sm mb-3">LED RGB, control remoto, múltiples colores</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$8.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="3.jpg" alt="Cargador completo tipo C" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('3.jpg', 'CARGADOR COMPLETO TIPO C')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CARGADOR COMPLETO TIPO C</h3>
+                <p class="text-gray-600 text-sm mb-3">Carga rápida, cable incluido, EL MEJOR PRECIO!</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$8.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="4.jpg" alt="Caja tubo 46 piezas" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('4.jpg', 'CAJA TUBO 46 PIEZAS')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CAJA TUBO 46 PIEZAS</h3>
+                <p class="text-gray-600 text-sm mb-3">Set profesional, 46 piezas, calidad industrial</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$13.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="5.jpg" alt="Auricular orejitas con luz" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('5.jpg', 'AURICULAR OREJITAS CON LUZ')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">AURICULAR OREJITAS CON LUZ</h3>
+                <p class="text-gray-600 text-sm mb-3">LED RGB, sonido estéreo, diseño cómodo</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$9.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="6.jpg" alt="Pava eléctrica" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('6.jpg', 'PAVA ELÉCTRICA')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">PAVA ELÉCTRICA</h3>
+                <p class="text-gray-600 text-sm mb-3">Automática, apagado automático, 1.7L</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$20.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="7.jpg" alt="Tostadora" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('7.jpg', 'TOSTADORA')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">TOSTADORA</h3>
+                <p class="text-gray-600 text-sm mb-3">2 ranuras, función descongelar, control de tostado</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$24.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="8.jpg" alt="Reloj inteligente" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('8.jpg', 'RELOJ INTELIGENTE')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">RELOJ INTELIGENTE</h3>
+                <p class="text-gray-600 text-sm mb-3">Pulsera activity tracker, monitor cardíaco, resistente al agua</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$24.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="9.jpg" alt="Termo 500ML" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('9.jpg', 'TERMO 500ML')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">TERMO 500ML</h3>
+                <p class="text-gray-600 text-sm mb-3">Acero inoxidable, mantiene temperatura 24h, diseño premium</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$12.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="10.jpg" alt="Aspiradora" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('10.jpg', 'ASPIRADORA')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">ASPIRADORA</h3>
+                <p class="text-gray-600 text-sm mb-3">Inalámbrica, potente succión, múltiples accesorios</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$10.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 11 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="11.jpg" alt="Control universal" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('11.jpg', 'CONTROL UNIVERSAL')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CONTROL UNIVERSAL</h3>
+                <p class="text-gray-600 text-sm mb-3">Compatibilidad múltiple, fácil configuración, diseño ergonómico</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$7.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 12 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="12.jpg" alt="Espejo para maquillaje" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('12.jpg', 'ESPEJO PARA MAQUILLAJE')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">ESPEJO PARA MAQUILLAJE</h3>
+                <p class="text-gray-600 text-sm mb-3">LED, luz natural, aumento 10x, base antideslizante</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$14.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 13 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="13.jpg" alt="Cargador de iPhone" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('13.jpg', 'CARGADOR DE IPHONE')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CARGADOR DE IPHONE</h3>
+                <p class="text-gray-600 text-sm mb-3">Carga rápida, cable lightning, compatible todos modelos</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$11.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 14 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="14.jpg" alt="Cargador portátil" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('14.jpg', 'CARGADOR PORTÁTIL')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CARGADOR PORTÁTIL</h3>
+                <p class="text-gray-600 text-sm mb-3">20000mAh, carga rápida, múltiples puertos, diseño compacto</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$18.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 15 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="15.jpg" alt="Juguete popit con sonido" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('15.jpg', 'JUGUETE POPIT CON SONIDO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">JUGUETE POPIT CON SONIDO</h3>
+                <p class="text-gray-600 text-sm mb-3">Divertido, múltiples colores, efecto sonoro, antiestrés</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$7.800</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 16 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="16.jpg" alt="Auricular de peluche" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('16.jpg', 'AURICULAR DE PELUCHE')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">AURICULAR DE PELUCHE</h3>
+                <p class="text-gray-600 text-sm mb-3">Diseño adorable, sonido estéreo, material suave, perfecto para niños</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$24.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 17 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="17.jpg" alt="Labubu dancing" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('17.jpg', 'LABUBU DANCING')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">LABUBU DANCING</h3>
+                <p class="text-gray-600 text-sm mb-3">Figura coleccionable, movimiento de baile, diseño kawaii</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$18.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 18 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="18.jpg" alt="Mini cámara infantil" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('18.jpg', 'MINI CÁMARA INFANTIL')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">MINI CÁMARA INFANTIL</h3>
+                <p class="text-gray-600 text-sm mb-3">Diseño para niños, fácil de usar, grabación HD, divertida</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$18.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 19 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="19.jpg" alt="Set de utensillos" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('19.jpg', 'SET DE UTENSILLOS')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">SET DE UTENSILLOS</h3>
+                <p class="text-gray-600 text-sm mb-3">Completo, calidad premium, múltiples piezas, ideal cocina</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$32.000</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 20 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="20.jpg" alt="Cámara endoscopio" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('20.jpg', 'CÁMARA ENDOSCOPIO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">CÁMARA ENDOSCOPIO</h3>
+                <p class="text-gray-600 text-sm mb-3">Inspección visual, LED incorporado, flexible, uso profesional</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$16.500</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Producto 21 -->
+            <div class="product-card bg-white rounded-xl p-4 relative">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <img src="21.jpg" alt="Vaso cafetero térmico con sensor" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('21.jpg', 'VASO CAFETERO TÉRMICO')">
+                </div>
+                <h3 class="text-lg font-semibold mb-2">VASO CAFETERO TÉRMICO</h3>
+                <p class="text-gray-600 text-sm mb-3">Sensor temperatura, mantiene calor, diseño elegante, 500ml</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="price-tag">$15.600</span>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
+                    </button>
+                </div>
+            </div>
+               <!-- Producto 22 -->
+<div class="product-card bg-white rounded-xl p-4 relative">
+    <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <img src="22.jpg" alt="Pava eléctrica de vidrio 2L" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('22.jpg', 'PAVA ELÉCTRICA DE VIDRIO 2L')">
+    </div>
+    <h3 class="text-lg font-semibold mb-2">PAVA ELÉCTRICA DE VIDRIO 2L</h3>
+    <p class="text-gray-600 text-sm mb-3">Diseño elegante, iluminación LED, hervido rápido, base giratoria</p>
+    <div class="flex justify-between items-center mb-3">
+        <span class="price-tag">$22.000</span>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <i class="fas fa-shopping-cart mr-2"></i>Comprar
+        </button>
+    </div>
+</div> 
+    </section>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/541159677565" 
+       target="_blank" 
+       class="whatsapp-float fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-full shadow-lg" 
+       aria-label="Chatea con nosotros por WhatsApp">
+       <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modal-image" class="modal-image" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        function openModal(imageSrc, productName) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = imageSrc;
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('open');
+        }
+
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+            const header = document.querySelector('.header-gradient');
+            header.classList.toggle('dark-mode');
+        });
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
 
             <!-- Producto 2 -->
             <div class="product-card bg-white rounded-xl p-4 relative">
