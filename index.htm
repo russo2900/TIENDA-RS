@@ -104,15 +104,39 @@
     </style>
 </head>
 <body>
-<header class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md">
-   <div class="flex items-center gap-2">
-      <img src="logo.svg" alt="Logo" class="h-8 w-8">
+<header class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md sticky top-0 z-50">
+   <div class="flex items-center gap-3">
+      <!-- Ícono redondo -->
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+         <i class="fas fa-bolt text-blue-600 text-xl"></i>
+      </div>
+
+      <!-- Título y subtítulo -->
       <div>
-         <h1 class="text-lg font-bold">TIENDA RS</h1>
-         <p class="text-xs">Electrónica y Accesorios</p>
+         <h1 class="text-xl md:text-2xl font-bold">TIENDA RS</h1>
+         <p class="text-xs text-blue-100">Electrónica y Accesorios</p>
       </div>
    </div>
 
+   <!-- Controles a la derecha -->
+   <div class="flex items-center gap-3">
+      <!-- Botón Modo Oscuro -->
+      <button id="toggle-dark-mode" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+         Modo Oscuro
+      </button>
+
+      <!-- Botón WhatsApp -->
+      <a href="https://wa.me/541159677565" 
+         target="_blank" 
+         class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
+         <i class="fab fa-whatsapp"></i>
+         <!-- Tooltip -->
+         <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
+            Contáctanos
+         </span>
+      </a>
+   </div>
+</header>
    <!-- Controles a la derecha -->
    <div class="flex items-center gap-3">
       <!-- Botón de modo oscuro -->
