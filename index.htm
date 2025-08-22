@@ -68,6 +68,9 @@
             background: white;
             border: 2px solid #e2e8f0;
             color: #4b5563;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
         }
         
         .dark-mode .category-filter {
@@ -76,7 +79,7 @@
             color: #d1d5db;
         }
         
-        .category-filter:hover {
+        .category-filter:hover, .category-filter.active {
             transform: scale(1.05);
             background: var(--primary);
             color: white;
@@ -202,17 +205,6 @@
             color: white;
         }
 
-        .zoom-level {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
         .product-image {
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -230,7 +222,6 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-left: 10px;
         }
 
         .dark-mode-btn:hover {
@@ -253,6 +244,222 @@
 
         .dark-mode footer {
             background: #0f172a;
+        }
+
+        /* Carrito de compras */
+        .cart-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 350px;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .dark-mode .cart-container {
+            background: #374151;
+            color: white;
+        }
+
+        .cart-container.open {
+            transform: translateX(0);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dark-mode .cart-item {
+            border-bottom: 1px solid #4b5563;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .dark-mode .cart-item-price {
+            color: #d1d5db;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: #f3f4f6;
+            border: none;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode .quantity-btn {
+            background: #4b5563;
+            color: white;
+        }
+
+        .quantity-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .dark-mode .quantity-btn:hover {
+            background: #6b7280;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .dark-mode .cart-total {
+            border-top: 2px solid #4b5563;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .verification-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .verification-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .verification-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .dark-mode .verification-content {
+            background: #374151;
+            color: white;
+        }
+
+        .phone-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode .phone-number {
+            background: #1e293b;
+            color: #3b82f6;
+        }
+
+        .phone-number:hover {
+            background: #e2e8f0;
+        }
+
+        .dark-mode .phone-number:hover {
+            background: #2d3748;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background: #d97706;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+            color: #6b7280;
+        }
+
+        .dark-mode .empty-cart {
+            color: #d1d5db;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 4000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
         }
     </style>
 </head>
@@ -278,20 +485,78 @@
                     <button id="toggleDark" class="dark-mode-btn">
                         <i class="fas fa-moon mr-2"></i>Modo Oscuro
                     </button>
+                    <button id="cartButton" class="cart-btn relative">
+                        <i class="fas fa-shopping-cart mr-2"></i>Carrito
+                        <span id="cartBadge" class="cart-badge">0</span>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Carrito de compras -->
+    <div id="cartContainer" class="cart-container">
+        <h3 class="text-xl font-bold mb-4">Tu Carrito</h3>
+        <div id="cartItems">
+            <div class="empty-cart">Tu carrito está vacío</div>
+        </div>
+        <div class="cart-total" style="display: none;">
+            Total: $<span id="cartTotal">0</span>
+        </div>
+        <button id="checkoutBtn" class="w-full bg-blue-600 text-white py-3 rounded-lg mt-4 hover:bg-blue-700 transition-colors" style="display: none;">
+            Verificar Disponibilidad
+        </button>
+    </div>
+
+    <!-- Modal de verificación -->
+    <div id="verificationModal" class="verification-modal">
+        <div class="verification-content">
+            <h3 class="text-2xl font-bold mb-4">Verificar Disponibilidad</h3>
+            <p>Para verificar la disponibilidad de los productos en tu carrito, contacta al siguiente número:</p>
+            <div class="phone-number" onclick="copyPhoneNumber()">
+                <i class="fab fa-whatsapp mr-2"></i>1159677565
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Haz clic en el número para copiarlo</p>
+            <button id="closeVerification" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de imagen -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-controls">
+                <button class="modal-btn" onclick="zoomIn()">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="modal-btn" onclick="zoomOut()">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+            <div class="zoom-level">100%</div>
+        </div>
+    </div>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="notificationText"></span>
+    </div>
+
     <!-- Categories -->
     <section class="container mx-auto px-6 py-8">
         <div class="flex flex-wrap gap-4 justify-center mb-8">
-            <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold"> Todos </button>
-            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Iluminación </button>
-            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Carga </button>
-            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Accesorios </button>
-            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Hogar </button>
-            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Juguetes </button>
+            <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold active" onclick="filterProducts('all')">Todos</button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('iluminacion')">Iluminación</button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('carga')">Carga</button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('accesorios')">Accesorios</button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('hogar')">Hogar</button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('juguetes')">Juguetes</button>
         </div>
     </section>
 
@@ -299,7 +564,7 @@
     <section class="container mx-auto px-6 py-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
             <!-- Producto 1 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="accesorios">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="1.jpg" alt="Patillera Novatix profesional con corte preciso y diseño ergonómico" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('1.jpg', 'PATILLERA NOVATIX')">
                 </div>
@@ -307,14 +572,14 @@
                 <p class="text-gray-600 text-sm mb-3">Profesional, corte preciso, ergonómica</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$9.500</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="PATILLERA NOVATIX" data-price="9500">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 2 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="iluminacion">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="2.jpg" alt="Foco de luz LED RGB con control remoto y múltiples colores" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('2.jpg', 'FOCO DE LUZ CON CONTROL')">
                 </div>
@@ -322,14 +587,14 @@
                 <p class="text-gray-600 text-sm mb-3">LED RGB, control remoto, múltiples colores</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$8.000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="FOCO DE LUZ CON CONTROL" data-price="8000">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 3 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="carga">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="3.jpg" alt="Cargador completo tipo C con carga rápida y cable incluido" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('3.jpg', 'CARGADOR COMPLETO TIPO C')">
                 </div>
@@ -337,14 +602,14 @@
                 <p class="text-gray-600 text-sm mb-3">Carga rápida, cable incluido, EL MEJOR PRECIO!</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$8.000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="CARGADOR COMPLETO TIPO C" data-price="8000">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 4 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="accesorios">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="4.jpg" alt="Caja tubo con 46 piezas de calidad industrial para uso profesional" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('4.jpg', 'CAJA TUBO 46 PIEZAS')">
                 </div>
@@ -352,14 +617,14 @@
                 <p class="text-gray-600 text-sm mb-3">Set profesional, 46 piezas, calidad industrial</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$13.000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="CAJA TUBO 46 PIEZAS" data-price="13000">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 5 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="accesorios">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="5.jpg" alt="Auricular orejitas con luz LED RGB y sonido estéreo" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('5.jpg', 'AURICULAR OREJITAS CON LUZ')">
                 </div>
@@ -367,14 +632,14 @@
                 <p class="text-gray-600 text-sm mb-3">LED RGB, sonido estéreo, diseño cómodo</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$9.500</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="AURICULAR OREJITAS CON LUZ" data-price="9500">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 6 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="hogar">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="6.jpg" alt="Pava eléctrica automática con apagado automático de 1.7 litros" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('6.jpg', 'PAVA ELÉCTRICA')">
                 </div>
@@ -382,14 +647,14 @@
                 <p class="text-gray-600 text-sm mb-3">Automática, apagado automático, 1.7L</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$20.000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="PAVA ELÉCTRICA" data-price="20000">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
             </div>
 
             <!-- Producto 7 -->
-            <div class="product-card rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative" data-category="hogar">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="7.jpg" alt="Tostadora con 2 ranuras, función descongelar y control de tostado" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('7.jpg', 'TOSTADORA')">
                 </div>
@@ -397,9 +662,15 @@
                 <p class="text-gray-600 text-sm mb-3">2 ranuras, función descongelar, control de tostado</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$24.000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-product="TOSTADORA" data-price="24000">
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="product-card rounded-xl p-4 relative" data-category="accesorios">
+                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items
                 </div>
             </div>
 
