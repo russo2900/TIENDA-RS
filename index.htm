@@ -104,21 +104,6 @@
     </style>
 </head>
 <body>
-    <header class="header-gradient text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <i class="fas fa-bolt text-blue-600 text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl md:text-3xl font-bold">TIENDA RS</h1>
-                        <p class="text-blue-100 text-sm">Electrónica y Accesorios</p>
-                    </div>
-                </div>
-                <button id="toggle-dark-mode" class="bg-gray-800 text-white px-4 py-2 rounded-lg">Modo Oscuro</button>
-            </div>
-        </div>
 <header class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md">
    <div class="flex items-center gap-2">
       <img src="logo.svg" alt="Logo" class="h-8 w-8">
@@ -146,6 +131,8 @@
             Contáctanos
          </span>
       </a>
+    </header>
+
     <!-- Categories -->
     <section class="container mx-auto px-6 py-8">
         <div class="flex flex-wrap gap-4 justify-center mb-8">
@@ -487,6 +474,25 @@
     </div>
 </div> 
     </section>
+<!-- Botón flotante WhatsApp con tooltip visible también en mobile -->
+<a href="https://wa.me/541159677565" 
+   target="_blank" 
+   class="whatsapp-float group fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg text-3xl flex items-center justify-center relative z-50" 
+   aria-label="Chatea con nosotros por WhatsApp">
+   <i class="fab fa-whatsapp"></i>
+
+   <!-- Tooltip para desktop (hover) -->
+   <span class="tooltip-message hidden md:block absolute bottom-16 right-1/2 translate-x-1/2 bg-green-600 text-white text-sm py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      Contáctanos
+   </span>
+
+   <!-- Tooltip para mobile (siempre visible) -->
+   <span class="md:hidden absolute bottom-16 right-1/2 translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded z-50">
+      Contáctanos
+   </span>
+</a>
+
+
     <!-- Modal -->
     <div class="modal" id="image-modal">
         <div class="modal-content">
@@ -573,37 +579,5 @@
             });
         }
     </script>
-  </div> <!-- Cierre del grid de productos -->
-
-        </section> <!-- Cierre de sección de productos -->
-
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12 mt-12">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">TIENDA RS</h3>
-                        <p class="text-gray-400">Los mejores precios en electrónica y accesorios. Calidad garantizada.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Contacto</h4>
-                        <a href="https://wa.me/541159677565" class="block text-gray-400 hover:text-white mb-2">
-                            <i class="fab fa-whatsapp mr-2"></i>1159677565
-                        </a>
-                        <a href="mailto:ezegullotta@gmail.com" class="block text-gray-400 hover:text-white mb-2">
-                            <i class="fas fa-envelope mr-2"></i>ezegullotta@gmail.com
-                        </a>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Horario</h4>
-                        <p class="text-gray-400">Lunes a Viernes: 9:00 - 18:00</p>
-                        <p class="text-gray-400">Sábados: 10:00 - 20:00</p>
-                    </div>
-                </div>
-                <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                    <p class="text-gray-400">© 2024 TIENDA RS. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </footer>
 </body>
 </html>
