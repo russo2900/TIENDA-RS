@@ -1,3 +1,26 @@
+<SKIPPED_HTML_EDIT_MODE></SKIPPED_HTML_EDIT_MODE>
+
+Necesito analizar el código completo que el usuario proporcionó. Veo que es una tienda online completa con muchos productos, pero tiene un problema con el botón de modo oscuro que no está funcionando correctamente. El usuario quiere que el fondo pueda cambiar entre blanco y negro.
+
+El código tiene:
+1. Un header con logo y botón de WhatsApp
+2. Un botón de modo oscuro en el header (que parece duplicado)
+3. Categorías de productos
+4. Una grilla de productos (21 productos)
+5. Un footer
+6. Algunos scripts JavaScript
+
+El problema principal es que el botón de modo oscuro no está implementado correctamente. Necesito:
+1. Corregir la estructura del header (eliminar el duplicado)
+2. Implementar correctamente la funcionalidad de modo oscuro
+3. Asegurarme de que todos los elementos cambien de color apropiadamente
+4. Mantener toda la funcionalidad existente
+
+Voy a crear el archivo completo con las correcciones necesarias.
+
+
+`index.html`
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,23 +37,46 @@
             --dark: #1e293b;
             --light: #f8fafc;
         }
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
+            transition: all 0.3s ease;
+            color: #1e293b;
         }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+        }
+        
         .header-gradient {
             background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
         }
+        
         .product-card {
             transition: all 0.3s ease;
             border: 2px solid #e2e8f0;
+            background: white;
         }
+        
+        .dark-mode .product-card {
+            background: #374151;
+            border-color: #4b5563;
+            color: #f3f4f6;
+        }
+        
+        .dark-mode .product-card p {
+            color: #d1d5db;
+        }
+        
         .product-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
             box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
         }
+        
         .price-tag {
             background: linear-gradient(135deg, var(--primary), #3b82f6);
             color: white;
@@ -38,14 +84,27 @@
             border-radius: 8px;
             font-weight: bold;
         }
+        
         .category-filter {
             transition: all 0.3s ease;
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #4b5563;
         }
+        
+        .dark-mode .category-filter {
+            background: #374151;
+            border-color: #4b5563;
+            color: #d1d5db;
+        }
+        
         .category-filter:hover {
             transform: scale(1.05);
             background: var(--primary);
             color: white;
+            border-color: var(--primary);
         }
+        
         .cart-notification {
             position: fixed;
             top: 20px;
@@ -59,6 +118,7 @@
             transform: translateX(100%);
             transition: transform 0.3s ease;
         }
+        
         .cart-notification.show {
             transform: translateX(0);
         }
@@ -94,6 +154,10 @@
             overflow: hidden;
             transform: scale(0.8);
             transition: transform 0.3s ease;
+        }
+
+        .dark-mode .modal-content {
+            background: #374151;
         }
 
         .modal.open .modal-content {
@@ -179,6 +243,39 @@
         .product-image:hover {
             transform: scale(1.05);
         }
+
+        .dark-mode-btn {
+            background: #1e293b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .dark-mode-btn:hover {
+            background: #374151;
+        }
+
+        .dark-mode .dark-mode-btn {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .dark-mode .dark-mode-btn:hover {
+            background: #e2e8f0;
+        }
+
+        footer {
+            background: #1e293b;
+            color: white;
+        }
+
+        .dark-mode footer {
+            background: #0f172a;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -195,31 +292,28 @@
                         <p class="text-blue-100 text-sm">Electrónica y Accesorios</p>
                     </div>
                 </div>
-                <a href="https://wa.me/541159677565" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                    <span>1159677565</span>
-                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/541159677565" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>1159677565</span>
+                    </a>
+                    <button id="toggleDark" class="dark-mode-btn">
+                        <i class="fas fa-moon mr-2"></i>Modo Oscuro
+                    </button>
+                </div>
             </div>
         </div>
- <!-- Header -->
-  <header class="bg-white shadow p-6 flex justify-between items-center">
-    <h1 class="text-3xl font-bold text-red-600">Tienda RS</h1>
-    <div class="flex gap-3">
-      <!-- Botón de modo oscuro -->
-      <button id="toggleDark" class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-        🌙 Modo Oscuro
-      </button>
-    </div>
-  </header>
+    </header>
+
     <!-- Categories -->
     <section class="container mx-auto px-6 py-8">
         <div class="flex flex-wrap gap-4 justify-center mb-8">
             <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold"> Todos </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Iluminación </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Carga </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Accesorios </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Hogar </button>
-            <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600"> Juguetes </button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Iluminación </button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Carga </button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Accesorios </button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Hogar </button>
+            <button class="category-filter px-6 py-2 rounded-lg font-semibold"> Juguetes </button>
         </div>
     </section>
 
@@ -227,9 +321,9 @@
     <section class="container mx-auto px-6 py-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
             <!-- Producto 1 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="1.jpg" alt="Patillera Novatix" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('1.jpg', 'PATILLERA NOVATIX')">
+                    <img src="1.jpg" alt="Patillera Novatix profesional con corte preciso y diseño ergonómico" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('1.jpg', 'PATILLERA NOVATIX')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">PATILLERA NOVATIX</h3>
                 <p class="text-gray-600 text-sm mb-3">Profesional, corte preciso, ergonómica</p>
@@ -242,9 +336,9 @@
             </div>
 
             <!-- Producto 2 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="2.jpg" alt="Foco de luz LED con control" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('2.jpg', 'FOCO DE LUZ CON CONTROL')">
+                    <img src="2.jpg" alt="Foco de luz LED RGB con control remoto y múltiples colores" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('2.jpg', 'FOCO DE LUZ CON CONTROL')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">FOCO DE LUZ CON CONTROL</h3>
                 <p class="text-gray-600 text-sm mb-3">LED RGB, control remoto, múltiples colores</p>
@@ -257,9 +351,9 @@
             </div>
 
             <!-- Producto 3 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="3.jpg" alt="Cargador completo tipo C" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('3.jpg', 'CARGADOR COMPLETO TIPO C')">
+                    <img src="3.jpg" alt="Cargador completo tipo C con carga rápida y cable incluido" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('3.jpg', 'CARGADOR COMPLETO TIPO C')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CARGADOR COMPLETO TIPO C</h3>
                 <p class="text-gray-600 text-sm mb-3">Carga rápida, cable incluido, EL MEJOR PRECIO!</p>
@@ -272,9 +366,9 @@
             </div>
 
             <!-- Producto 4 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="4.jpg" alt="Caja tubo 46 piezas" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('4.jpg', 'CAJA TUBO 46 PIEZAS')">
+                    <img src="4.jpg" alt="Caja tubo con 46 piezas de calidad industrial para uso profesional" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('4.jpg', 'CAJA TUBO 46 PIEZAS')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CAJA TUBO 46 PIEZAS</h3>
                 <p class="text-gray-600 text-sm mb-3">Set profesional, 46 piezas, calidad industrial</p>
@@ -287,9 +381,9 @@
             </div>
 
             <!-- Producto 5 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="5.jpg" alt="Auricular orejitas con luz" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('5.jpg', 'AURICULAR OREJITAS CON LUZ')">
+                    <img src="5.jpg" alt="Auricular orejitas con luz LED RGB y sonido estéreo" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('5.jpg', 'AURICULAR OREJITAS CON LUZ')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">AURICULAR OREJITAS CON LUZ</h3>
                 <p class="text-gray-600 text-sm mb-3">LED RGB, sonido estéreo, diseño cómodo</p>
@@ -302,9 +396,9 @@
             </div>
 
             <!-- Producto 6 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="6.jpg" alt="Pava eléctrica" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('6.jpg', 'PAVA ELÉCTRICA')">
+                    <img src="6.jpg" alt="Pava eléctrica automática con apagado automático de 1.7 litros" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('6.jpg', 'PAVA ELÉCTRICA')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">PAVA ELÉCTRICA</h3>
                 <p class="text-gray-600 text-sm mb-3">Automática, apagado automático, 1.7L</p>
@@ -317,9 +411,9 @@
             </div>
 
             <!-- Producto 7 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="7.jpg" alt="Tostadora" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('7.jpg', 'TOSTADORA')">
+                    <img src="7.jpg" alt="Tostadora con 2 ranuras, función descongelar y control de tostado" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('7.jpg', 'TOSTADORA')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">TOSTADORA</h3>
                 <p class="text-gray-600 text-sm mb-3">2 ranuras, función descongelar, control de tostado</p>
@@ -332,9 +426,9 @@
             </div>
 
             <!-- Producto 8 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="8.jpg" alt="Reloj inteligente" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('8.jpg', 'RELOJ INTELIGENTE')">
+                    <img src="8.jpg" alt="Reloj inteligente con pulsera activity tracker y monitor cardíaco" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('8.jpg', 'RELOJ INTELIGENTE')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">RELOJ INTELIGENTE</h3>
                 <p class="text-gray-600 text-sm mb-3">Pulsera activity tracker, monitor cardíaco, resistente al agua</p>
@@ -347,9 +441,9 @@
             </div>
 
             <!-- Producto 9 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="9.jpg" alt="Termo 500ML" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('9.jpg', 'TERMO 500ML')">
+                    <img src="9.jpg" alt="Termo de acero inoxidable 500ml que mantiene temperatura 24 horas" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('9.jpg', 'TERMO 500ML')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">TERMO 500ML</h3>
                 <p class="text-gray-600 text-sm mb-3">Acero inoxidable, mantiene temperatura 24h, diseño premium</p>
@@ -362,9 +456,9 @@
             </div>
 
             <!-- Producto 10 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="10.jpg" alt="Aspiradora" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('10.jpg', 'ASPIRADORA')">
+                    <img src="10.jpg" alt="Aspiradora inalámbrica con potente succión y múltiples accesorios" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('10.jpg', 'ASPIRADORA')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">ASPIRADORA</h3>
                 <p class="text-gray-600 text-sm mb-3">Inalámbrica, potente succión, múltiples accesorios</p>
@@ -377,9 +471,9 @@
             </div>
 
             <!-- Producto 11 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="11.jpg" alt="Control universal" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('11.jpg', 'CONTROL UNIVERSAL')">
+                    <img src="11.jpg" alt="Control universal con compatibilidad múltiple y diseño ergonómico" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('11.jpg', 'CONTROL UNIVERSAL')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CONTROL UNIVERSAL</h3>
                 <p class="text-gray-600 text-sm mb-3">Compatibilidad múltiple, fácil configuración, diseño ergonómico</p>
@@ -392,9 +486,9 @@
             </div>
 
             <!-- Producto 12 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="12.jpg" alt="Espejo para maquillaje" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('12.jpg', 'ESPEJO PARA MAQUILLAJE')">
+                    <img src="12.jpg" alt="Espejo para maquillaje con LED, luz natural y aumento 10x" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('12.jpg', 'ESPEJO PARA MAQUILLAJE')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">ESPEJO PARA MAQUILLAJE</h3>
                 <p class="text-gray-600 text-sm mb-3">LED, luz natural, aumento 10x, base antideslizante</p>
@@ -407,9 +501,9 @@
             </div>
 
             <!-- Producto 13 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="13.jpg" alt="Cargador de iPhone" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('13.jpg', 'CARGADOR DE IPHONE')">
+                    <img src="13.jpg" alt="Cargador de iPhone con carga rápida y cable lightning" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('13.jpg', 'CARGADOR DE IPHONE')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CARGADOR DE IPHONE</h3>
                 <p class="text-gray-600 text-sm mb-3">Carga rápida, cable lightning, compatible todos modelos</p>
@@ -422,9 +516,9 @@
             </div>
 
             <!-- Producto 14 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="14.jpg" alt="Cargador portátil" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('14.jpg', 'CARGADOR PORTÁTIL')">
+                    <img src="14.jpg" alt="Cargador portátil 20000mAh con carga rápida y múltiples puertos" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('14.jpg', 'CARGADOR PORTÁTIL')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CARGADOR PORTÁTIL</h3>
                 <p class="text-gray-600 text-sm mb-3">20000mAh, carga rápida, múltiples puertos, diseño compacto</p>
@@ -437,9 +531,9 @@
             </div>
 
             <!-- Producto 15 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="15.jpg" alt="Juguete popit con sonido" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('15.jpg', 'JUGUETE POPIT CON SONIDO')">
+                    <img src="15.jpg" alt="Juguete popit con sonido, múltiples colores y efecto antiestrés" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('15.jpg', 'JUGUETE POPIT CON SONIDO')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">JUGUETE POPIT CON SONIDO</h3>
                 <p class="text-gray-600 text-sm mb-3">Divertido, múltiples colores, efecto sonoro, antiestrés</p>
@@ -452,9 +546,9 @@
             </div>
 
             <!-- Producto 16 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="16.jpg" alt="Auricular de peluche" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('16.jpg', 'AURICULAR DE PELUCHE')">
+                    <img src="16.jpg" alt="Auricular de peluche con diseño adorable y sonido estéreo para niños" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('16.jpg', 'AURICULAR DE PELUCHE')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">AURICULAR DE PELUCHE</h3>
                 <p class="text-gray-600 text-sm mb-3">Diseño adorable, sonido estéreo, material suave, perfecto para niños</p>
@@ -467,9 +561,9 @@
             </div>
 
             <!-- Producto 17 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="17.jpg" alt="Labubu dancing" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('17.jpg', 'LABUBU DANCING')">
+                    <img src="17.jpg" alt="Labubu dancing - Figura coleccionable con movimiento de baile y diseño kawaii" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('17.jpg', 'LABUBU DANCING')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">LABUBU DANCING</h3>
                 <p class="text-gray-600 text-sm mb-3">Figura coleccionable, movimiento de baile, diseño kawaii</p>
@@ -482,9 +576,9 @@
             </div>
 
             <!-- Producto 18 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="18.jpg" alt="Mini cámara infantil" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('18.jpg', 'MINI CÁMARA INFANTIL')">
+                    <img src="18.jpg" alt="Mini cámara infantil con diseño para niños y grabación HD" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('18.jpg', 'MINI CÁMARA INFANTIL')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">MINI CÁMARA INFANTIL</h3>
                 <p class="text-gray-600 text-sm mb-3">Diseño para niños, fácil de usar, grabación HD, divertida</p>
@@ -497,11 +591,11 @@
             </div>
 
             <!-- Producto 19 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="19.jpg" alt="Set de utensillos" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('19.jpg', 'SET DE UTENSILLOS')">
+                    <img src="19.jpg" alt="Set de utensillos de cocina con 19 piezas de calidad premium" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('19.jpg', 'SET DE UTENSILLOS')">
                 </div>
-                <h3 class="text-lg font-semibold mb-2">SET DE UTENSILLOS1 19 piezas </h3>
+                <h3 class="text-lg font-semibold mb-2">SET DE UTENSILLOS 19 piezas</h3>
                 <p class="text-gray-600 text-sm mb-3">Completo, calidad premium, múltiples piezas, ideal cocina</p>
                 <div class="flex justify-between items-center mb-3">
                     <span class="price-tag">$32.000</span>
@@ -512,9 +606,9 @@
             </div>
 
             <!-- Producto 20 -->
-            <div class="product-card bg-white rounded-xl p-4 relative">
+            <div class="product-card rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="20.jpg" alt="Cámara endoscopio" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('20.jpg', 'CÁMARA ENDOSCOPIO')">
+                    <img src="20.jpg" alt="Cámara endoscopio para inspección visual con LED incorporado y flexible" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('20.jpg', 'CÁMARA ENDOSCOPIO')">
                 </div>
                 <h3 class="text-lg font-semibold mb-2">CÁMARA ENDOSCOPIO</h3>
                 <p class="text-gray-600 text-sm mb-3">Inspección visual, LED incorporado, flexible, uso profesional</p>
@@ -526,7 +620,7 @@
                 </div>
             </div>
 
-            <!-- Producto 21 -->
+          <!-- Producto 21 -->
             <div class="product-card bg-white rounded-xl p-4 relative">
                 <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
                     <img src="21.jpg" alt="Vaso cafetero térmico con sensor" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('21.jpg', 'VASO CAFETERO TÉRMICO')">
@@ -540,7 +634,7 @@
                     </button>
                 </div>
             </div>
-<!-- Producto 22 -->
+               <!-- Producto 22 -->
 <div class="product-card bg-white rounded-xl p-4 relative">
     <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
         <img src="22.jpg" alt="Pava eléctrica de vidrio 2L" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('22.jpg', 'PAVA ELÉCTRICA DE VIDRIO 2L')">
@@ -553,9 +647,10 @@
             <i class="fas fa-shopping-cart mr-2"></i>Comprar
         </button>
     </div>
-</div>
-</div> <!-- grid de productos -->
-</section> <!-- Cierre de sección de productos -->
+</div> 
+               </div> <!-- Cierre del grid de productos -->
+
+        </section> <!-- Cierre de sección de productos -->
 
         <!-- Footer -->
         <footer class="bg-gray-900 text-white py-12 mt-12">
@@ -585,27 +680,6 @@
                 </div>
             </div>
         </footer>
-  <!-- Scripts -->
-  <script>
-    // Toggle modo oscuro
-    document.getElementById('toggleDark').addEventListener('click', function () {
-      document.body.classList.toggle('dark');
-      this.textContent = document.body.classList.contains('dark') ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
-    });
 
-    // Filtrar productos
-    function filterProducts(category) {
-      let products = document.querySelectorAll('.product-card');
-      products.forEach(product => {
-        if (category === "all" || product.getAttribute("data-category") === category) {
-          product.style.display = "block";
-        } else {
-          product.style.display = "none";
-        }
-      });
-    }
-  </script>
     </body>
 </html>
-
-
