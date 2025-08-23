@@ -1,64 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TIENDA RS - Electrónica y Accesorios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #dc2626;
+      --accent: #10b981;
+      --dark: #1e293b;
+      --light: #f8fafc;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+    }
+    body.dark-mode {
+      background: #1e293b;
+      color: #f8fafc;
+    }
+    .header-gradient {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+    }
+    .header-gradient.dark-mode {
+      background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #3b82f6 100%);
+    }
+    .product-card {
+      transition: all 0.3s ease;
+      border: 2px solid #e2e8f0;
+    }
+    .product-card.dark-mode {
+      background: #2a2a2a;
+      border-color: #4b5563;
+    }
+    .price-tag {
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .price-tag.dark-mode {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .modal-image {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: background 0.3s ease;
+    }
+    .modal-close:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER CON INSTAGRAM -->
 <header class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md">
-   <div class="flex items-center gap-2">
-      <div class="bg-white rounded-full h-12 w-12 flex items-center justify-center shadow-md">
-         <span class="text-3xl">⚡</span> <!-- Emoji de rayo -->
-      </div>
-      <div>
-         <h1 class="text-lg font-bold">TIENDA RS</h1>
-         <p class="text-xs">Electrónica y Accesorios</p>
-      </div>
-   </div>
+  <div class="flex items-center gap-2">
+    <div class="bg-white rounded-full h-12 w-12 flex items-center justify-center shadow-md">
+      <span class="text-3xl">⚡</span>
+    </div>
+    <div>
+      <h1 class="text-lg font-bold">TIENDA RS</h1>
+      <p class="text-xs">Electrónica y Accesorios</p>
+    </div>
+  </div>
 
-   <!-- Controles a la derecha -->
-   <div class="flex items-center gap-3">
-      <!-- Botón de modo oscuro -->
-      <button id="toggle-dark-mode" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-         Modo Oscuro
-      </button>
+  <div class="flex items-center gap-3">
+    <!-- Modo oscuro -->
+    <button id="toggle-dark-mode" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+      Modo Oscuro
+    </button>
 
-      <!-- Botón de Instagram pequeño -->
-      <a href="https://www.instagram.com/tienda_rs_store?igsh=OHFqZjNya2ZoOG9j" 
-         target="_blank" 
-         class="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full text-sm flex items-center justify-center transition duration-300"
-         style="width: 36px; height: 36px;">
-         <i class="fab fa-instagram text-lg"></i>
-      </a>
+    <!-- Instagram botón pequeño -->
+    <a href="https://www.instagram.com/tienda_rs_store?igsh=OHFqZjNya2ZoOG9j" 
+       target="_blank"
+       class="relative group bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full flex items-center justify-center transition"
+       style="width: 36px; height: 36px;">
+      <i class="fab fa-instagram text-lg"></i>
+      <!-- Tooltip -->
+      <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-pink-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
+        Instagram
+      </span>
+    </a>
 
-      <!-- Botón de WhatsApp -->
-      <a href="https://wa.me/541159677565" 
-         target="_blank" 
-         class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
-         <i class="fab fa-whatsapp"></i>
-         <!-- Tooltip -->
-         <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
-            Contáctanos
-         </span>
-      </a>
-   </div>
-</header> class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md">
-   <div class="flex items-center gap-2">
-      <div class="bg-white rounded-full h-12 w-12 flex items-center justify-center shadow-md">
-         <span class="text-3xl">⚡</span> <!-- Emoji de rayo -->
-      </div>
-      <div>
-         <h1 class="text-lg font-bold">TIENDA RS</h1>
-         <p class="text-xs">Electrónica y Accesorios</p>
-      </div>
-   </div>
-
-   <!-- Controles a la derecha -->
-   <div class="flex items-center gap-3">
-      <!-- Botón de modo oscuro -->
-      <button id="toggle-dark-mode" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-         Modo Oscuro
-      </button>
-
-      <!-- Botón de WhatsApp -->
-      <a href="https://wa.me/541159677565" 
-         target="_blank" 
-         class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
-         <i class="fab fa-whatsapp"></i>
-
+    <!-- WhatsApp -->
+    <a href="https://wa.me/541159677565" 
+       target="_blank" 
+       class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
+      <i class="fab fa-whatsapp"></i>
+      <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
+        Contáctanos
+      </span>
+    </a>
+  </div>
+</header
+<!-- CONTENIDO PRINCIPAL -->
+<section class="container mx-auto px-6 py-8">
+  <div class="flex flex-wrap gap-4 justify-center mb-8">
+    <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('all')">Todos</button>
+    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('iluminacion')">Iluminación</button>
+    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('carga')">Carga</button>
+    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('accesorios')">Accesorios</button>
+  </div>
+</section>
          <!-- Tooltip -->
          <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
             Contáctanos
