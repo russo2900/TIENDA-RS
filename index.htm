@@ -105,8 +105,9 @@
 </head>
 <body>
 
-<!-- HEADER CON INSTAGRAM -->
+<!-- HEADER -->
 <header class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-800 to-blue-500 text-white shadow-md">
+  <!-- Logo y texto -->
   <div class="flex items-center gap-2">
     <div class="bg-white rounded-full h-12 w-12 flex items-center justify-center shadow-md">
       <span class="text-3xl">⚡</span>
@@ -117,13 +118,14 @@
     </div>
   </div>
 
+  <!-- Botones lado derecho -->
   <div class="flex items-center gap-3">
     <!-- Modo oscuro -->
     <button id="toggle-dark-mode" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
       Modo Oscuro
     </button>
 
-    <!-- Instagram botón pequeño -->
+    <!-- Instagram botón -->
     <a href="https://www.instagram.com/tienda_rs_store?igsh=OHFqZjNya2ZoOG9j" 
        target="_blank"
        class="relative group bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full flex items-center justify-center transition"
@@ -135,18 +137,20 @@
       </span>
     </a>
 
-    <!-- WhatsApp -->
+    <!-- WhatsApp botón -->
     <a href="https://wa.me/541159677565" 
        target="_blank" 
        class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
       <i class="fab fa-whatsapp"></i>
+      <!-- Tooltip -->
       <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
         Contáctanos
       </span>
     </a>
   </div>
-</header
-<!-- CONTENIDO PRINCIPAL -->
+</header>
+
+<!-- SECCIÓN PRINCIPAL -->
 <section class="container mx-auto px-6 py-8">
   <div class="flex flex-wrap gap-4 justify-center mb-8">
     <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('all')">Todos</button>
@@ -155,13 +159,6 @@
     <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('accesorios')">Accesorios</button>
   </div>
 </section>
-         <!-- Tooltip -->
-         <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
-            Contáctanos
-         </span>
-      </a>
-   </div>
-</header>
     <!-- Categories -->
     <section class="container mx-auto px-6 py-8">
         <div class="flex flex-wrap gap-4 justify-center mb-8">
