@@ -522,12 +522,37 @@
 
 
                 
-    </section>
+  <!-- Sección productos (abrir sección si no está abierta) -->
+<section>
+  <div class="products-container grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Ejemplo Gimnasio -->
+    <div class="product-card bg-white rounded-xl p-4" data-category="gimnasio">
+      <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <img src="mancuernas.jpg" alt="Mancuernas 10kg"
+             class="w-full h-full object-cover rounded-lg cursor-pointer"
+             onclick="openModal('mancuernas.jpg')">
+      </div>
+      <h3 class="text-lg font-semibold mb-2">Mancuernas 10kg</h3>
+      <p class="text-gray-600 text-sm mb-3">Par de mancuernas de hierro con recubrimiento antideslizante</p>
+      <div class="flex justify-between items-center">
+        <span class="price-tag">$15.000</span>
+        <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          <i class="fas fa-shopping-cart mr-2"></i>Comprar
+        </button>
+      </div>
+    </div>
+
+    <!-- Agrega aquí más productos -->
+
+  </div>
+</section>
+
 <!-- Botón flotante WhatsApp con tooltip visible también en mobile -->
 <a href="https://wa.me/541159677565" 
    target="_blank" 
    class="whatsapp-float group fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg text-3xl flex items-center justify-center relative z-50" 
-   aria-label="Chatea con nosotros por WhatsApp">
+   aria-label="Chatea con nosotros por WhatsApp" rel="noopener noreferrer">
    <i class="fab fa-whatsapp"></i>
 
    <!-- Tooltip para desktop (hover) -->
@@ -541,55 +566,33 @@
    </span>
 </a>
 
-
-  <!-- Ejemplo Gimnasio -->
-    <div class="product-card bg-white rounded-xl p-4" data-category="gimnasio">
-      <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-        <img src="mancuernas.jpg" alt="Mancuernas 10kg"
-             class="w-full h-full object-cover rounded-lg cursor-pointer"
-             onclick="openModal('mancuernas.jpg')">
-      </div>
-      <h3 class="text-lg font-semibold mb-2">Mancuernas 10kg</h3>
-      <p class="text-gray-600 text-sm mb-3">Par de mancuernas de hierro con recubrimiento antideslizante</p>
-      <div class="flex justify-between items-center">
-        <span class="price-tag">$15.000</span>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-          <i class="fas fa-shopping-cart mr-2"></i>Comprar
-        </button>
-      </div>
-    </div>
-
-    <!-- Agrega aquí más productos -->
-
-  </div>
-</section>
-
-<!-- Botón flotante WhatsApp -->
-<a href="https://wa.me/541159677565" target="_blank"
-   class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg text-3xl">
-   <i class="fab fa-whatsapp"></i>
-</a>
-
 <!-- Modal -->
-<div class="modal" id="image-modal">
+<div class="modal" id="image-modal" style="display:none;">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <img id="modal-image" class="modal-image" src="" alt="">
+    <span class="modal-close cursor-pointer" onclick="closeModal()">&times;</span>
+    <img id="modal-image" class="modal-image" src="" alt="Imagen ampliada">
   </div>
 </div>
 
 <script>
   function openModal(src) {
-    document.getElementById("modal-image").src = src;
-    document.getElementById("image-modal").classList.add("open");
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+    modalImage.src = src;
+    modal.style.display = "block";
   }
   function closeModal() {
-    document.getElementById("image-modal").classList.remove("open");
+    const modal = document.getElementById("image-modal");
+    modal.style.display = "none";
   }
+
+  // Si tienes botón toggle-dark-mode, descomenta y añade el botón en HTML
   document.getElementById("toggle-dark-mode").addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     document.querySelectorAll(".product-card").forEach(c => c.classList.toggle("dark-mode"));
   });
+  
+
   function filterProducts(category) {
     document.querySelectorAll(".product-card").forEach(p => {
       if (category === "all" || p.getAttribute("data-category") === category) {
@@ -600,6 +603,7 @@
     });
   }
 </script>
+
 
         <!-- Footer -->
         <footer class="bg-gray-900 text-white py-12 mt-12">
