@@ -133,7 +133,6 @@
        class="relative group bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-full flex items-center justify-center transition"
        style="width: 36px; height: 36px;">
       <i class="fab fa-instagram text-lg"></i>
-      <!-- Tooltip -->
       <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-pink-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
         Instagram
       </span>
@@ -144,7 +143,6 @@
        target="_blank" 
        class="relative group bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-lg flex items-center justify-center">
       <i class="fab fa-whatsapp"></i>
-      <!-- Tooltip -->
       <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-50">
         Contáctanos
       </span>
@@ -159,6 +157,8 @@
     <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('iluminacion')">Iluminación</button>
     <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('carga')">Carga</button>
     <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('accesorios')">Accesorios</button>
+    <!-- Nuevo botón Gimnasio -->
+    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('gimnasio')">Gimnasio</button>
   </div>
 </section>
 
@@ -633,8 +633,56 @@
     </script>
 
 
-               </div> <!-- Cierre del grid de productos -->
+               </div> <!-- Cierre del grid de productos electronicos -->
 
+
+
+
+ <!-- Producto Gimnasio 1 -->
+    <div class="product-card bg-white rounded-xl p-4 relative" data-category="gimnasio">
+      <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <img src="mancuernas.jpg" alt="Mancuernas 10kg" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('mancuernas.jpg', 'Mancuernas 10kg')">
+      </div>
+      <h3 class="text-lg font-semibold mb-2">Mancuernas 10kg</h3>
+      <p class="text-gray-600 text-sm mb-3">Par de mancuernas de hierro con recubrimiento antideslizante</p>
+      <div class="flex justify-between items-center mb-3">
+        <span class="price-tag">$15.000</span>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <i class="fas fa-shopping-cart mr-2"></i>Comprar
+        </button>
+      </div>
+    </div>
+
+    <!-- Producto Gimnasio 2 -->
+    <div class="product-card bg-white rounded-xl p-4 relative" data-category="gimnasio">
+      <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+        <img src="bandas.jpg" alt="Bandas elásticas" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('bandas.jpg', 'Bandas Elásticas')">
+      </div>
+      <h3 class="text-lg font-semibold mb-2">Bandas Elásticas</h3>
+      <p class="text-gray-600 text-sm mb-3">Set de 5 bandas de resistencia</p>
+      <div class="flex justify-between items-center mb-3">
+        <span class="price-tag">$6.000</span>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <i class="fas fa-shopping-cart mr-2"></i>Comprar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function filterProducts(category) {
+    const products = document.querySelectorAll('.product-card');
+    products.forEach(product => {
+      if (category === 'all' || product.getAttribute('data-category') === category) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+    }
+    });
+  }
+</script>
         </section> <!-- Cierre de sección de productos -->
 
         <!-- Footer -->
