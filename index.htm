@@ -218,8 +218,8 @@
 <section class="container mx-auto px-6 py-8">
   <div class="flex flex-wrap gap-4 justify-center mb-8">
     <button class="category-filter bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold" onclick="filterProducts('all')">electronica</button>
-    <!-- Nuevo botón Gimnasio -->
-    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('gimnasio')">Gimnasio</button>
+    <!-- Nuevo botón Nuevo -->
+    <button class="category-filter bg-white border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600" onclick="filterProducts('nuevo')">Nuevo</button>
   </div>
 </section>
 
@@ -582,27 +582,19 @@
                         <i class="fas fa-shopping-cart mr-2"></i>Comprar
                     </button>
                 </div>
-            </div>
-
-
-                
-  <!-- Sección productos (abrir sección si no está abierta) -->
- <div class="product-card bg-white rounded-xl p-4 relative">
-                <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <img src="25.jpg" alt="escalera deportiva" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('25.jpg', 'escalera deportiva')">
-                </div>
-                <h3 class="text-lg font-semibold mb-2">escalera deportiva</h3>
-                <p class="text-gray-600 text-sm mb-3"></p>
-                <div class="flex justify-between items-center mb-3">
-                    <span class="price-tag">5 peldaños 3 Mts $4500
-10 peldaños 4 Mts $ 6000
-15 peldaños 5 Mts $ 8000</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                        <i class="fas fa-shopping-cart mr-2"></i>Comprar
-                    </button>
-                </div>
-            </div>
-
+                <div class="product-card bg-white rounded-xl p-4 relative" data-category="nuevo">
+       <div class="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+           <img src="26.jpg" alt="Nuevo Producto Ejemplo" class="w-full h-full object-cover rounded-lg product-image" onclick="openModal('26.jpg', 'NUEVO PRODUCTO EJEMPLO')">
+       </div>
+       <h3 class="text-lg font-semibold mb-2">NUEVO PRODUCTO EJEMPLO</h3>
+       <p class="text-gray-600 text-sm mb-3">Descripción breve del producto nuevo.</p>
+       <div class="flex justify-between items-center mb-3">
+           <span class="price-tag">$XX.XXX</span>
+           <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+               <i class="fas fa-shopping-cart mr-2"></i>Comprar
+           </button>
+       </div>
+   </div>
     <!-- Agrega aquí más productos -->
 
 <!-- Botón flotante WhatsApp -->
